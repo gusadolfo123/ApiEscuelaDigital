@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_06_151258) do
+ActiveRecord::Schema.define(version: 2018_11_06_192526) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string "Description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "categories_courses", id: false, force: :cascade do |t|
+    t.bigint "course_id"
+    t.bigint "category_id"
+    t.index ["category_id"], name: "index_categories_courses_on_category_id"
+    t.index ["course_id"], name: "index_categories_courses_on_course_id"
+  end
 
   create_table "courses", force: :cascade do |t|
     t.string "Title"
@@ -33,10 +46,40 @@ ActiveRecord::Schema.define(version: 2018_11_06_151258) do
     t.index ["student_id"], name: "index_courses_students_on_student_id"
   end
 
+  create_table "courses_users", id: false, force: :cascade do |t|
+    t.bigint "course_id"
+    t.bigint "user_id"
+    t.text "Content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_courses_users_on_course_id"
+    t.index ["user_id"], name: "index_courses_users_on_user_id"
+  end
+
   create_table "document_types", force: :cascade do |t|
     t.string "Description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "lessons", force: :cascade do |t|
+    t.string "Title"
+    t.text "Description"
+    t.string "UrlVideo"
+    t.bigint "temary_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["temary_id"], name: "index_lessons_on_temary_id"
+  end
+
+  create_table "lessons_users", id: false, force: :cascade do |t|
+    t.bigint "lesson_id"
+    t.bigint "user_id"
+    t.text "Content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lesson_id"], name: "index_lessons_users_on_lesson_id"
+    t.index ["user_id"], name: "index_lessons_users_on_user_id"
   end
 
   create_table "rols", force: :cascade do |t|
@@ -63,6 +106,14 @@ ActiveRecord::Schema.define(version: 2018_11_06_151258) do
     t.index ["user_id"], name: "index_teachers_on_user_id"
   end
 
+  create_table "temaries", force: :cascade do |t|
+    t.string "Title"
+    t.bigint "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_temaries_on_course_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "firstName"
     t.string "lastName"
@@ -78,11 +129,19 @@ ActiveRecord::Schema.define(version: 2018_11_06_151258) do
     t.index ["rol_id"], name: "index_users_on_rol_id"
   end
 
+  add_foreign_key "categories_courses", "categories"
+  add_foreign_key "categories_courses", "courses"
   add_foreign_key "courses", "teachers"
   add_foreign_key "courses_students", "courses"
   add_foreign_key "courses_students", "students"
+  add_foreign_key "courses_users", "courses"
+  add_foreign_key "courses_users", "users"
+  add_foreign_key "lessons", "temaries"
+  add_foreign_key "lessons_users", "lessons"
+  add_foreign_key "lessons_users", "users"
   add_foreign_key "students", "users"
   add_foreign_key "teachers", "users"
+  add_foreign_key "temaries", "courses"
   add_foreign_key "users", "document_types"
   add_foreign_key "users", "rols"
 end
