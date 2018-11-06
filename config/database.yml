@@ -7,12 +7,12 @@ default: &default
 
 development:
   <<: *default
-  database: db/EscuelaDigital
+  database: dev/escueladigital
 
 test:
   <<: *default
-  database: db/test.EscuelaDigital
+  database: test/escueladigital
 
 production:
   <<: *default
-  database: db/production.EscuelaDigital
+  database: production/escueladigital
