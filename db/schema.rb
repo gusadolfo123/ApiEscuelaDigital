@@ -21,34 +21,6 @@ ActiveRecord::Schema.define(version: 2018_11_07_013757) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "categories_courses", force: :cascade do |t|
-    t.bigint "category_id"
-    t.bigint "course_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_categories_courses_on_category_id"
-    t.index ["course_id"], name: "index_categories_courses_on_course_id"
-  end
-
-  create_table "comments_courses", force: :cascade do |t|
-    t.text "content"
-    t.bigint "course_id"
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["course_id"], name: "index_comments_courses_on_course_id"
-    t.index ["user_id"], name: "index_comments_courses_on_user_id"
-  end
-
-  create_table "comments_lessons", force: :cascade do |t|
-    t.text "content"
-    t.bigint "lesson_id"
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["lesson_id"], name: "index_comments_lessons_on_lesson_id"
-    t.index ["user_id"], name: "index_comments_lessons_on_user_id"
-  end
 
   create_table "courses", force: :cascade do |t|
     t.string "Title"
@@ -131,12 +103,6 @@ ActiveRecord::Schema.define(version: 2018_11_07_013757) do
     t.index ["rol_id"], name: "index_users_on_rol_id"
   end
 
-  add_foreign_key "categories_courses", "categories"
-  add_foreign_key "categories_courses", "courses"
-  add_foreign_key "comments_courses", "courses"
-  add_foreign_key "comments_courses", "users"
-  add_foreign_key "comments_lessons", "lessons"
-  add_foreign_key "comments_lessons", "users"
   add_foreign_key "courses", "teachers"
   add_foreign_key "courses_students", "courses"
   add_foreign_key "courses_students", "students"
