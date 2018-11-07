@@ -3,7 +3,8 @@ class CommentsCoursesController < ApplicationController
 
   # GET /comments_courses
   def index
-    @comments_courses = CommentsCourse.all
+    # @comments_courses = CommentsCourse.all    
+    @comments_courses = CommentsCourse.filter(params.slice(:user_id))
 
     render json: @comments_courses
   end
@@ -39,11 +40,12 @@ class CommentsCoursesController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
-    def set_comments_course
+    def set_comments_course      
       @comments_course = CommentsCourse.find(params[:id])
     end
-
+  
     # Only allow a trusted parameter "white list" through.
     def comments_course_params
       params.require(:comments_course).permit(:content, :course_id, :user_id)
