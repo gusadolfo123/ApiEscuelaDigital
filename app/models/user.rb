@@ -5,6 +5,14 @@ class User < ApplicationRecord
   belongs_to :rol
   belongs_to :document_type
 
+  # Para relacion muchos a muchos
+  has_many :comments_course
+  has_many :courses, through: :comments_course
+
+  # Para relacion muchos a muchos
+  has_many :comments_lesson
+  has_many :courses, through: :comments_lesson
+
   before_save :downcase_email
   validacion_email = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i  
 

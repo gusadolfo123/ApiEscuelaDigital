@@ -1,6 +1,18 @@
 class Course < ApplicationRecord
-  belongs_to :teacher
-  has_and_belongs_to_many :students
-  has_and_belongs_to_many :categories
+  
+  belongs_to :teacher  
   has_many :temaries
+  
+  # # Para relacion muchos a muchos
+  has_many :comments_course
+  has_many :usersComments, through: :comments_course
+
+  # # Para relacion muchos a muchos
+  has_many :comments_lesson
+  has_many :usersLesson, through: :comments_lesson
+
+  # # Para relacion muchos a muchos
+  has_many :categories_course
+  has_many :categories, through: :categories_course
+
 end

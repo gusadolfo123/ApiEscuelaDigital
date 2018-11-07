@@ -1,3 +1,6 @@
 class Category < ApplicationRecord
-    has_and_belongs_to_many :courses
+    # # Para relacion muchos a muchos
+    has_many :categories_course
+    has_many :courses, through: :categories_course
+
 end
