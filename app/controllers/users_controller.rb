@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    @users = User.all
+    @users = User.filter(params.slice(:email))
 
     render json: @users
   end

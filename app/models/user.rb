@@ -1,6 +1,8 @@
 class User < ApplicationRecord
 
   has_secure_password 
+
+  
   
   belongs_to :rol
   belongs_to :document_type
@@ -20,6 +22,10 @@ class User < ApplicationRecord
   validates :lastName, presence:true
   validates :email, presence:true, length: { maximum: 100 }, format: { with: validacion_email }, uniqueness: { case_sensitive: false }  
   validates :password, presence:true, length: { minimum: 8 }, allow_nil:true
+
+  include Filterable
+
+  scope :email, -> (email) { where email: email }
 
   # metodo para volver el email a minuscula
   def downcase_email

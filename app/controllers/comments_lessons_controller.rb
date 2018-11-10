@@ -3,7 +3,8 @@ class CommentsLessonsController < ApplicationController
 
   # GET /comments_lessons
   def index
-    @comments_lessons = CommentsLesson.all
+    # @comments_lessons = CommentsLesson.all
+    @comments_lessons = CommentsLesson.filter(params.slice(:user_id))
 
     render json: @comments_lessons
   end
@@ -39,6 +40,7 @@ class CommentsLessonsController < ApplicationController
   end
 
   private
+  
     # Use callbacks to share common setup or constraints between actions.
     def set_comments_lesson
       @comments_lesson = CommentsLesson.find(params[:id])
