@@ -3,10 +3,9 @@ class ContactMailer < ApplicationMailer
     layout 'contact'
         
     def new_message(email, fullName, subject, content)
-        @email =     email
         @fullName = fullName
         @content = content
-        mail(to: email, subject: subject)
+        mail(to: "gusadolfo123@hotmail.com", subject: subject)
     end 
 
 end
