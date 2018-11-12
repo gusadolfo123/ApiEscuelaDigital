@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+        /* Email styles need to be inline */
+        h1 {
+            background-color: rgb(214, 69, 98);
+            color: whitesmoke;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .contaier {
+            margin: 0 auto;
+            width: 980px;
+            background-color: beige;
+        }
+
+        .main {
+            max-height: 500px;
+            height: 500px;
+            padding-left: 50px;
+            padding-right: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="contaier">
+        <h1>Nuevo Mensaje</h1>
+        <div class="main">
+            <%= yield %>
+        </div>
+    </div>
+</body>
+
+</html>
