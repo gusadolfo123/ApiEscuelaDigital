@@ -14,5 +14,6 @@ class Course < ApplicationRecord
   # # Para relacion muchos a muchos
   has_many :categories_course
   has_many :categories, through: :categories_course
-
+  
+  
 end

@@ -3,7 +3,8 @@ class TeachersController < ApplicationController
 
   # GET /teachers
   def index
-    @teachers = Teacher.all
+    # @teachers = Teacher.all
+    @teachers = Teacher.filter(params.slice(:user_id))
 
     render json: @teachers
   end
